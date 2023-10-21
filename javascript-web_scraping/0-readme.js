@@ -1,10 +1,21 @@
 #!/usr/bin/node
+// Import the 'fs' module to work with the file system
+const fs = require('fs');
 
-const fs = require('fs'); // Import the Node.js 'fs' (File System) module to work with files
+// Check if the correct number of command line arguments is provided
+if (process.argv.length !== 3) {
+  console.error('Usage: node 0-readme.js <file_path>');
+  process.exit(1); // Exit the program with an error code
+}
 
-const path = process.argv[2]; // Gets the third command line argument, which is the path to the file to read
+// Get the file path from the command line argument
+const filePath = process.argv[2];
 
-fs.readFile(path, 'utf-8', (err, data) => { // Read the content of the specified file
-  if (err) console.error(err); // If there is an error, display the error message in the console
-  else console.log(data); // Si no hay errores, muestra el contenido del archivo en la consola
+// Read the content of the file in utf-8 encoding
+fs.readFile(filePath, (err, data) => {
+  if (err) {
+    console.error(err); // Display the error if one occurs
+  } else {
+    console.log(data.toString()); // Display the file content if there are no errors
+  }
 });
